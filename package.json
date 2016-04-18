@@ -9,7 +9,7 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
-    "test": "ember try:testall"
+    "test": "node tests/runner.js"
   },
   "repository": "https://github.com/VerdigrisTech/ember-cli-deploy-ghpages",
   "engines": {
