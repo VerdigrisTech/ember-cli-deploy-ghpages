@@ -1,7 +1,7 @@
 {
   "name": "ember-cli-deploy-ghpages",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "An ember-cli-deploy plugin to upload to GitHub Pages.",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,12 +11,12 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "",
+  "repository": "https://github.com/VerdigrisTech/ember-cli-deploy-ghpages",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 4.0.0"
   },
-  "author": "",
-  "license": "MIT",
+  "author": "Andrew Jo <andrew@verdigris.co> (https://github.com/AndrewJo)",
+  "license": "BSD-2-Clause",
   "devDependencies": {
     "broccoli-asset-rev": "^2.2.0",
     "ember-cli": "1.13.13",
