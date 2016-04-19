@@ -13,10 +13,12 @@ To quickly get started with this plugin, follow the steps below:
 * Ensure [ember-cli-deploy-build](https://github.com/zapnito/ember-cli-deploy-build)
   is installed.
 * Install this plugin.
+
   ```bash
   $ ember install ember-cli-deploy-ghpages
   ```
 * Run the pipeline.
+
   ```bash
   $ ember deploy
   ```
