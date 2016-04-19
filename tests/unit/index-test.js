@@ -1,6 +1,10 @@
+/* jshint mocha: true */
 'use strict';
 
 var expect = require('chai').expect;
+var path = require('path');
+var fs = require('fs');
+var git = require('gift');
 
 describe('github pages plugin', function () {
   let subject;
@@ -58,13 +62,49 @@ describe('github pages plugin', function () {
   });
 
   describe('#setup hook', function () {
-    beforeEach(function () {
+    this.timeout(30000);
+
+    let repo;
+    let repoPath;
+
+    before(function (done) {
       plugin.beforeHook(context);
       plugin.configure(context);
+      plugin.setup(context)
+        .then(function () {
+          repoPath = path.resolve(context.project.root, 'tmp/gh-pages');
+          repo = git(repoPath);
+          done();
+        });
     });
 
-    it('creates gh-pages branch that does not already exist', function () {
-      plugin.setup(context);
+    it('creates a tmp directory', function (done) {
+      fs.access(repoPath, fs.F_OK, function (error) {
+        expect(error).to.be.null;
+        done();
+      });
+    });
+
+    it("creates an orphaned branch named 'gh-pages'", function (done) {
+      /**
+       * Using symbolic reference is the most reliable way to get an orphaned
+       * branch name.
+       */
+      repo.git('symbolic-ref', { short: true }, ['HEAD'], (error, stdout) => {
+        expect(error).to.be.null;
+        expect(stdout.trim()).to.equal('gh-pages');
+        done();
+      });
+    });
+
+    it('removes all files in the branch', function (done) {
+      repo.status((error, status) => {
+        let files = Object.keys(status.files)
+          .filter(key => status.files[key].tracked);
+
+        expect(files).to.be.empty;
+        done();
+      });
     });
   });
 });
