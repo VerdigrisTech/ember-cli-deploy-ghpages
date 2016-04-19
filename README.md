@@ -1,4 +1,6 @@
-# Ember-cli-deploy-ghpages
+# ember-cli-deploy-ghpages
+
+> An ember-cli-deploy-plugin to upload to GitHub pages.
 
 ![Build](https://img.shields.io/travis/VerdigrisTech/ember-cli-deploy-ghpages.svg)
 
