@@ -4,27 +4,32 @@
 
 ![Build](https://img.shields.io/travis/VerdigrisTech/ember-cli-deploy-ghpages.svg)
 
-This README outlines the details of collaborating on this Ember addon.
+This plugin uploads your built Ember dist files to GitHub pages.
 
-## Installation
+## Getting Started
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+To quickly get started with this plugin, follow the steps below:
 
-## Running
+* Ensure [ember-cli-deploy-build](https://github.com/zapnito/ember-cli-deploy-build)
+  is installed.
+* Install this plugin.
+  ```bash
+  $ ember install ember-cli-deploy-ghpages
+  ```
+* Run the pipeline.
+  ```bash
+  $ ember deploy
+  ```
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+## ember-cli-deploy Hooks Implemented
+
+For detailed information on what plugin hooks are and how they work, please
+refer to the [Plugin Documentation](http://ember-cli.github.io/ember-cli-deploy/plugins).
+
+* `setup`
+* `didBuild`
+* `upload`
 
 ## Running Tests
 
-* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
-
-## Building
-
-* `ember build`
-
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+* `npm test`
