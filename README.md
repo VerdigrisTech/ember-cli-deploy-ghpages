@@ -1,5 +1,7 @@
 # Ember-cli-deploy-ghpages
 
+![Build](https://img.shields.io/travis/VerdigrisTech/ember-cli-deploy-ghpages.svg)
+
 This README outlines the details of collaborating on this Ember addon.
 
 ## Installation
