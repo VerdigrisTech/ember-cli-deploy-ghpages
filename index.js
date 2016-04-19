@@ -171,9 +171,12 @@ module.exports = {
           });
       },
 
-      didBuild (context) {
+      didBuild: function (context) {
         console.log("Did build");
         console.log(this.repository);
+      },
+
+      upload: function (context) {
       }
     });
 
