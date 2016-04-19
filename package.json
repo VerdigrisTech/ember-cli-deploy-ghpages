@@ -45,8 +45,10 @@
     "ember-cli-deploy-plugin"
   ],
   "dependencies": {
+    "denodeify": "^1.2.1",
     "ember-cli-babel": "^5.1.5",
     "ember-cli-deploy-plugin": "^0.2.5",
+    "fs-extra": "^0.28.0",
     "nodegit": "^0.12.2"
   },
   "ember-addon": {
