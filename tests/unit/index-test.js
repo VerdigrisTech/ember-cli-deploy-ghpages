@@ -61,6 +61,10 @@ describe('github pages plugin', function () {
     expect(plugin.upload).to.be.a('function');
   });
 
+  it('implements teardown hook', function () {
+    expect(plugin.teardown).to.be.a('function');
+  });
+
   describe('#setup hook', function () {
     this.timeout(30000);
 

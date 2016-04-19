@@ -177,6 +177,9 @@ module.exports = {
       },
 
       upload: function (context) {
+      },
+
+      teardown: function (context) {
       }
     });
 
