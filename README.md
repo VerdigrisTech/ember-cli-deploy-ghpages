@@ -47,7 +47,8 @@ For more information on how to configure plugins, refer to the
 
 ### gitRemoteUrl (`required`)
 
-The URL that corresponds to your GitHub repository.
+The URL that corresponds to your GitHub repository. The plugin will push the
+built dist files under the `gh-pages` branch on this repository.
 
 _Default:_ `undefined`
 
