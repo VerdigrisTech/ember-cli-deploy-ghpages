@@ -17,6 +17,13 @@ To quickly get started with this plugin, follow the steps below:
   ```bash
   $ ember install ember-cli-deploy-ghpages
   ```
+* Place the following configuration into `config/deploy.js`.
+
+  ```javascript
+  ENV.ghpages = {
+    gitRemoteUrl: '<your-github-repository-url>'
+  }
+  ```
 * Run the pipeline.
 
   ```bash
@@ -32,6 +39,14 @@ refer to the [Plugin Documentation](http://ember-cli.github.io/ember-cli-deploy/
 * `didBuild`
 * `willUpload`
 * `upload`
+
+## Configuration Options
+
+### gitRemoteUrl (`required`)
+
+The URL that corresponds to your GitHub repository.
+
+_Default:_ `undefined`
 
 ## Running Tests
 

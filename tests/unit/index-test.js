@@ -40,7 +40,11 @@ describe('github pages plugin', function () {
         'assets/fixture.css'
       ],
       project: stubProject,
-      config: {}
+      config: {
+        ghpages: {
+          gitRemoteUrl: 'git@github.com:VerdigrisTech/ember-cli-deploy-ghpages.git'
+        }
+      }
     };
 
     repoPath = path.resolve(context.project.root, 'tmp/gh-pages');
