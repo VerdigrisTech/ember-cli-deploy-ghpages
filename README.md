@@ -43,7 +43,7 @@ refer to the [Plugin Documentation](http://ember-cli-deploy.github.io/ember-cli-
 ## Configuration Options
 
 For more information on how to configure plugins, refer to the
-[Plugin Documentation](http://ember-cli-deploy.github.io/ember-cli-deploy/docs/v0.6.x/configuration-overview/)
+[Plugin Documentation](http://ember-cli-deploy.github.io/ember-cli-deploy/docs/v0.6.x/configuration-overview/).
 
 ### gitRemoteUrl (`required`)
 
