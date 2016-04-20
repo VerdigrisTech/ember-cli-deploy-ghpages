@@ -3,7 +3,7 @@
 
 var expect = require('chai').expect;
 var path = require('path');
-var fs = require('fs');
+var fs = require('fs-extra');
 var git = require('gift');
 
 describe('github pages plugin', function () {
@@ -12,6 +12,7 @@ describe('github pages plugin', function () {
   let plugin;
   let context;
   let mockUI;
+  let repoPath;
 
   before(function () {
     subject = require('../../index');
@@ -21,12 +22,6 @@ describe('github pages plugin', function () {
       },
       root: process.cwd()
     };
-  });
-
-  beforeEach(function () {
-    plugin = subject.createDeployPlugin({
-      name: 'ghpages'
-    });
 
     mockUI = {
       verbose: true,
@@ -40,9 +35,27 @@ describe('github pages plugin', function () {
     context = {
       ui: mockUI,
       distDir: `${process.cwd()}/tests/fixtures/dist`,
+      distFiles: [
+        'index.html',
+        'assets/fixture.css'
+      ],
       project: stubProject,
       config: {}
     };
+
+    repoPath = path.resolve(context.project.root, 'tmp/gh-pages');
+  });
+
+  beforeEach(function () {
+    plugin = subject.createDeployPlugin({
+      name: 'ghpages'
+    });
+  });
+
+  after(function (done) {
+    fs.remove(repoPath, function () {
+      done();
+    });
   });
 
   it('has a name', function () {
@@ -66,17 +79,15 @@ describe('github pages plugin', function () {
   });
 
   describe('#setup hook', function () {
-    this.timeout(30000);
+    this.timeout(5000);
 
     let repo;
-    let repoPath;
 
     before(function (done) {
       plugin.beforeHook(context);
       plugin.configure(context);
       plugin.setup(context)
         .then(function () {
-          repoPath = path.resolve(context.project.root, 'tmp/gh-pages');
           repo = git(repoPath);
           done();
         });
@@ -107,6 +118,32 @@ describe('github pages plugin', function () {
           .filter(key => status.files[key].tracked);
 
         expect(files).to.be.empty;
+        done();
+      });
+    });
+  });
+
+  describe('#didBuild hook', function () {
+    this.timeout(5000);
+
+    let repo;
+
+    before(function (done) {
+      plugin.beforeHook(context);
+      plugin.configure(context);
+      plugin.setup(context)
+        .then(function () {
+          return plugin.didBuild(context);
+        })
+        .then(function () {
+          repo = git(repoPath);
+          done();
+        });
+    });
+
+    it('dist files are committed', function (done) {
+      repo.ls_files((error, files) => {
+        expect(files).to.be.eql([['assets/fixture.css'], ['index.html']]);
         done();
       });
     });
