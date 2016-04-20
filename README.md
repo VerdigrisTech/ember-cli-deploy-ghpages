@@ -33,7 +33,7 @@ To quickly get started with this plugin, follow the steps below:
 ## ember-cli-deploy Hooks Implemented
 
 For detailed information on what plugin hooks are and how they work, please
-refer to the [Plugin Documentation](http://ember-cli.github.io/ember-cli-deploy/plugins).
+refer to the [Plugin Documentation](http://ember-cli-deploy.github.io/ember-cli-deploy/docs/v0.6.x/plugins-overview).
 
 * `setup`
 * `didBuild`
@@ -41,6 +41,9 @@ refer to the [Plugin Documentation](http://ember-cli.github.io/ember-cli-deploy/
 * `upload`
 
 ## Configuration Options
+
+For more information on how to configure plugins, refer to the
+[Plugin Documentation](http://ember-cli-deploy.github.io/ember-cli-deploy/docs/v0.6.x/configuration-overview/)
 
 ### gitRemoteUrl (`required`)
 
