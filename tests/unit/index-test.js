@@ -70,6 +70,10 @@ describe('github pages plugin', function () {
     expect(plugin.didBuild).to.be.a('function');
   });
 
+  it('implements willUpload hook', function () {
+    expect(plugin.willUpload).to.be.a('function');
+  });
+
   it('implements upload hook', function () {
     expect(plugin.upload).to.be.a('function');
   });

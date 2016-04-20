@@ -30,6 +30,7 @@ refer to the [Plugin Documentation](http://ember-cli.github.io/ember-cli-deploy/
 
 * `setup`
 * `didBuild`
+* `willUpload`
 * `upload`
 
 ## Running Tests

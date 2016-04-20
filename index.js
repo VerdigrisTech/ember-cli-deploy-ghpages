@@ -237,6 +237,10 @@ module.exports = {
           .catch(error => self.log(error));
       },
 
+      willUpload: function (context) {
+        // TODO: Set upstream to remote
+      },
+
       upload: function (context) {
       },
 
