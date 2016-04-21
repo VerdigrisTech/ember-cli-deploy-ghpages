@@ -200,6 +200,9 @@ describe('github pages plugin', function () {
         .then(function () {
           repo = git(repoPath);
           done();
+        })
+        .catch(function (error) {
+          done(error);
         });
     });
 
