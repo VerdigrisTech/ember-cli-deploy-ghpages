@@ -185,6 +185,30 @@ module.exports = {
       });
     }
 
+    /**
+     * Private function for pushing to upstream branch.
+     *
+     * @params {Repo} repository
+     * @params {String} branch
+     * @params {String} remote
+     * @params {Boolean} setUpstream
+     * @return {Promise}
+     */
+    function pushUpstream(repository, branch, remote, setUpstream) {
+      return new Promise((resolve, reject) => {
+        repository.git('push', {
+          u: setUpstream,
+          f: true
+        }, [remote, branch], error => {
+          if (error) {
+            return reject(error);
+          }
+
+          return resolve();
+        });
+      });
+    }
+
     var GHPagesPlugin = DeployPluginBase.extend({
       name: options.name,
 
@@ -287,7 +311,8 @@ module.exports = {
         let branch = this.readConfig('gitBranch');
 
         return addRemote(context.gitRepo, remoteName, remoteUrl)
-          .then(function () {
+          .then(() => {
+            this.log('remote repository added', { color: 'green' });
             return setUpstream(context.gitRepo, branch, remoteName);
           })
           .catch(() => {
@@ -299,6 +324,18 @@ module.exports = {
       },
 
       upload: function (context) {
+        let repo = context.gitRepo;
+        let branch = this.readConfig('gitBranch');
+        let remoteName = this.readConfig('gitRemoteName');
+        let setUpstream = context.setUpstreamOnPush;
+
+        this.log('pushing to remote repository');
+
+        return pushUpstream(repo, branch, remoteName, setUpstream)
+          .then(() => {
+            this.log('push success', { color: 'green' });
+          })
+          .catch(error => this.log(error, { color: 'red' }));
       },
 
       teardown: function (context) {

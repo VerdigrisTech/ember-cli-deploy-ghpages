@@ -5,6 +5,7 @@ var expect = require('chai').expect;
 var path = require('path');
 var fs = require('fs-extra');
 var git = require('gift');
+var RSVP = require('rsvp');
 
 describe('github pages plugin', function () {
   let subject;
@@ -182,6 +183,57 @@ describe('github pages plugin', function () {
       repo.git('remote', {}, [], (error, stdout) => {
         expect(stdout).to.have.string('ember-cli-deploy-test');
         done();
+      });
+    });
+  });
+
+  describe('#upload hook', function () {
+    this.timeout(10000);
+    let repo;
+
+    before(function (done) {
+      plugin.beforeHook(context);
+      plugin.configure(context);
+      plugin.setup(context)
+        .then(function () {
+          return plugin.didBuild(context);
+        })
+        .then(function () {
+          return plugin.willUpload(context);
+        })
+        .then(function () {
+          return plugin.upload(context);
+        })
+        .then(function () {
+          repo = git(repoPath);
+          done();
+        });
+    });
+
+    function revParse(branch) {
+      return new RSVP.Promise((resolve, reject) => {
+        repo.git('rev-parse', {}, [branch], (error, stdout) => {
+          if (error) {
+            return reject(error);
+          }
+
+          return resolve(stdout);
+        });
+      });
+    }
+
+    it('pushes branch to remote repository', function (done) {
+      // Fetch from remote and see if local is up-to-date
+      repo.remote_fetch('ember-cli-deploy-test', error => {
+        expect(error).to.be.null;
+
+        RSVP.all([
+          revParse('gh-pages'),
+          revParse('ember-cli-deploy-test/gh-pages')
+        ]).then((shaHashes) => {
+          expect(shaHashes[0]).to.be.equal(shaHashes[1]);
+          done();
+        });
       });
     });
   });
