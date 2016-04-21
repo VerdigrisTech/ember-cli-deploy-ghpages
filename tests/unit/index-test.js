@@ -29,7 +29,6 @@ describe('github pages plugin', function () {
       messages: [],
       write: function () {},
       writeLine: function (message) {
-        console.log(message);
         this.messages.push(message);
       }
     };
@@ -58,17 +57,6 @@ describe('github pages plugin', function () {
       name: 'ghpages'
     });
   });
-
-  // afterEach(function (done) {
-    // fs.remove(repoPath, function () {
-    //   done();
-    // });
-    // plugin.teardown(context)
-    //   .then(() => done())
-    //   .catch(error => {
-    //     done(error);
-    //   });
-  // });
 
   it('has a name', function () {
     expect(plugin.name).to.equal('ghpages');

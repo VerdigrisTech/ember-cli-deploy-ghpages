@@ -339,7 +339,6 @@ module.exports = {
       },
 
       teardown: function (context) {
-        console.log(this);
         let tmp = this.readConfig('projectTmpPath');
         let repoTmpPath = path.join(tmp, this.readConfig('repoTmpPath'));
         repoTmpPath = path.resolve(context.project.root, repoTmpPath);
