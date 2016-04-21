@@ -339,6 +339,23 @@ module.exports = {
       },
 
       teardown: function (context) {
+        console.log(this);
+        let tmp = this.readConfig('projectTmpPath');
+        let repoTmpPath = path.join(tmp, this.readConfig('repoTmpPath'));
+        repoTmpPath = path.resolve(context.project.root, repoTmpPath);
+
+        return new Promise((resolve, reject) => {
+          this.log('cleaning up');
+          fs.remove(repoTmpPath, error => {
+            if (error) {
+              this.log(error, { color: 'red' });
+              reject(error);
+            }
+
+            this.log('cleanup complete', { color: 'green' });
+            resolve();
+          });
+        });
       }
     });
 

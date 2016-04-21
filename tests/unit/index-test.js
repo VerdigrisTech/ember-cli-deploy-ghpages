@@ -59,10 +59,15 @@ describe('github pages plugin', function () {
     });
   });
 
-  // after(function (done) {
-  //   fs.remove(repoPath, function () {
-  //     done();
-  //   });
+  // afterEach(function (done) {
+    // fs.remove(repoPath, function () {
+    //   done();
+    // });
+    // plugin.teardown(context)
+    //   .then(() => done())
+    //   .catch(error => {
+    //     done(error);
+    //   });
   // });
 
   it('has a name', function () {
@@ -235,6 +240,22 @@ describe('github pages plugin', function () {
           done();
         });
       });
+    });
+  });
+
+  describe('#teardown hook', function () {
+    before(function (done) {
+      plugin.beforeHook(context);
+      plugin.teardown(context)
+        .then(() => done());
+    });
+
+    it('performs cleanup', function () {
+      function checkPath() {
+        fs.accessSync(repoPath, fs.F_OK);
+      }
+
+      expect(checkPath).to.throw(Error);
     });
   });
 });
