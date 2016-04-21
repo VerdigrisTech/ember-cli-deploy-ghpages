@@ -28,6 +28,7 @@ describe('github pages plugin', function () {
       messages: [],
       write: function () {},
       writeLine: function (message) {
+        console.log(message);
         this.messages.push(message);
       }
     };
@@ -42,7 +43,8 @@ describe('github pages plugin', function () {
       project: stubProject,
       config: {
         ghpages: {
-          gitRemoteUrl: 'git@github.com:VerdigrisTech/ember-cli-deploy-ghpages.git'
+          gitRemoteUrl: 'git@github.com:VerdigrisTech/ember-cli-deploy-ghpages.git',
+          gitRemoteName: 'ember-cli-deploy-test'
         }
       }
     };
@@ -56,11 +58,11 @@ describe('github pages plugin', function () {
     });
   });
 
-  after(function (done) {
-    fs.remove(repoPath, function () {
-      done();
-    });
-  });
+  // after(function (done) {
+  //   fs.remove(repoPath, function () {
+  //     done();
+  //   });
+  // });
 
   it('has a name', function () {
     expect(plugin.name).to.equal('ghpages');
@@ -152,6 +154,33 @@ describe('github pages plugin', function () {
     it('dist files are committed', function (done) {
       repo.ls_files((error, files) => {
         expect(files).to.be.eql([['assets/fixture.css'], ['index.html']]);
+        done();
+      });
+    });
+  });
+
+  describe('#willUpload hook', function () {
+    let repo;
+
+    before(function (done) {
+      plugin.beforeHook(context);
+      plugin.configure(context);
+      plugin.setup(context)
+        .then(function () {
+          return plugin.didBuild(context);
+        })
+        .then(function () {
+          return plugin.willUpload(context);
+        })
+        .then(function () {
+          repo = git(repoPath);
+          done();
+        });
+    });
+
+    it('adds remote repository for tracking', function (done) {
+      repo.git('remote', {}, [], (error, stdout) => {
+        expect(stdout).to.have.string('ember-cli-deploy-test');
         done();
       });
     });

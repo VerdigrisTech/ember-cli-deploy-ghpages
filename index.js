@@ -144,14 +144,56 @@ module.exports = {
       });
     }
 
+    /**
+     * Private function for adding remote repo.
+     *
+     * @params {Repo} repository
+     * @params {String} remoteUrl
+     * @return {Promise}
+     */
+    function addRemote(repository, remoteName, remoteUrl) {
+      return new Promise((resolve, reject) => {
+        repository.remote_add(remoteName, remoteUrl, error => {
+          if (error) {
+            return reject(error);
+          }
+
+          return resolve();
+        });
+      });
+    }
+
+    /**
+     * Private function for setting upstream for a branch.
+     *
+     * @params {Repo} repository
+     * @params {String} branch
+     * @params {String} remoteName
+     * @return {Promise}
+     */
+    function setUpstream(repository, branch, remoteName) {
+      return new Promise((resolve, reject) => {
+        let remoteBranch = `${remoteName}/${branch}`;
+
+        repository.git('branch', { u: true }, [remoteBranch, branch], error => {
+          if (error) {
+            return reject(error);
+          }
+
+          return resolve();
+        });
+      });
+    }
+
     var GHPagesPlugin = DeployPluginBase.extend({
       name: options.name,
 
       defaultConfig: {
-        branch: 'gh-pages',
         projectTmpPath: 'tmp',
         repoTmpPath: 'gh-pages',
-        commitMessage: 'Deploy dist files by ember-cli-deploy-ghpages'
+        commitMessage: 'Deploy dist files by ember-cli-deploy-ghpages',
+        gitBranch: 'gh-pages',
+        gitRemoteName: 'ember-cli-deploy'
       },
 
       requiredConfig: ['gitRemoteUrl'],
@@ -159,7 +201,7 @@ module.exports = {
       setup: function (context) {
         let repo;
         let self = this;
-        let branch = this.readConfig('branch');
+        let branch = this.readConfig('gitBranch');
         let tmp = this.readConfig('projectTmpPath');
         let relativeRepoTmpPath = this.readConfig('repoTmpPath');
         let projectTmpPath = path.resolve(context.project.root, tmp);
@@ -240,7 +282,20 @@ module.exports = {
       },
 
       willUpload: function (context) {
-        // TODO: Set upstream to remote
+        let remoteName = this.readConfig('gitRemoteName');
+        let remoteUrl = this.readConfig('gitRemoteUrl');
+        let branch = this.readConfig('gitBranch');
+
+        return addRemote(context.gitRepo, remoteName, remoteUrl)
+          .then(function () {
+            return setUpstream(context.gitRepo, branch, remoteName);
+          })
+          .catch(() => {
+            // Upstream branch does not exist. Mark it so we know during
+            // upload stage.
+            this.log('remote branch does not exist', { color: 'yellow' });
+            context.setUpstreamOnPush = true;
+          });
       },
 
       upload: function (context) {
