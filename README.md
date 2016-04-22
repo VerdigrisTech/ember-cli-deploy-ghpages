@@ -39,6 +39,7 @@ refer to the [Plugin Documentation](http://ember-cli-deploy.github.io/ember-cli-
 * `didBuild`
 * `willUpload`
 * `upload`
+* `teardown`
 
 ## Configuration Options
 
