@@ -217,7 +217,8 @@ module.exports = {
         repoTmpPath: 'gh-pages',
         commitMessage: 'Deploy dist files by ember-cli-deploy-ghpages',
         gitBranch: 'gh-pages',
-        gitRemoteName: 'ember-cli-deploy'
+        gitRemoteName: 'ember-cli-deploy',
+        domain: null
       },
 
       requiredConfig: ['gitRemoteUrl'],
@@ -230,6 +231,7 @@ module.exports = {
         let relativeRepoTmpPath = this.readConfig('repoTmpPath');
         let projectTmpPath = path.resolve(context.project.root, tmp);
         let repoTmpPath = path.resolve(projectTmpPath, relativeRepoTmpPath);
+        let domain = this.readConfig('domain');
 
         return ensureDir(path.resolve(context.project.root, repoTmpPath))
           .then(function () {
@@ -275,6 +277,15 @@ module.exports = {
             self.log(`all files removed on '${branch}' branch`, {
               color: 'green'
             });
+
+            if (domain) {
+              self.log(`setting up custom domain`);
+              let cname = path.resolve(repoTmpPath, 'CNAME');
+
+              fs.writeFile(cname, domain, () => {
+                self.log(`custom domain set up at: ${domain}`);
+              });
+            }
           })
           .catch(function (error) {
             this.log(error, { color: 'red' });

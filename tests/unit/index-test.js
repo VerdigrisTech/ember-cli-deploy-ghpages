@@ -44,7 +44,8 @@ describe('github pages plugin', function () {
       config: {
         ghpages: {
           gitRemoteUrl: 'git@github.com:VerdigrisTech/ember-cli-deploy-ghpages.git',
-          gitRemoteName: 'ember-cli-deploy-test'
+          gitRemoteName: 'ember-cli-deploy-test',
+          domain: 'test.example.com'
         }
       }
     };
@@ -125,6 +126,15 @@ describe('github pages plugin', function () {
         done();
       });
     });
+
+    it('creates a CNAME file if custom domain is specified', function (done) {
+      let cnameFile = path.resolve(repoPath, 'CNAME');
+      fs.readFile(cnameFile, { encoding: 'UTF-8' }, function (error, data) {
+        expect(error).to.be.null;
+        expect(data).to.be.equal('test.example.com');
+        done(error);
+      });
+    });
   });
 
   describe('#didBuild hook', function () {
@@ -147,7 +157,7 @@ describe('github pages plugin', function () {
 
     it('dist files are committed', function (done) {
       repo.ls_files((error, files) => {
-        expect(files).to.be.eql([['assets/fixture.css'], ['index.html']]);
+        expect(files).to.be.eql([['CNAME'], ['assets/fixture.css'], ['index.html']]);
         done();
       });
     });
