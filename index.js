@@ -218,7 +218,7 @@ module.exports = {
         commitMessage: 'Deploy dist files by ember-cli-deploy-ghpages',
         gitBranch: 'gh-pages',
         gitRemoteName: 'ember-cli-deploy',
-        domain: null
+        domain: undefined
       },
 
       requiredConfig: ['gitRemoteUrl'],
