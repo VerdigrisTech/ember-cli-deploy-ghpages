@@ -191,7 +191,7 @@ describe('github pages plugin', function () {
   });
 
   describe('#upload hook', function () {
-    this.timeout(10000);
+    this.timeout(30000);
     let repo;
 
     before(function (done) {
