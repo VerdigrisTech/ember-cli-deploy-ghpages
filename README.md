@@ -2,7 +2,7 @@
 
 > An ember-cli-deploy-plugin to upload to GitHub pages.
 
-![Build](https://img.shields.io/travis/VerdigrisTech/ember-cli-deploy-ghpages.svg)
+[![Build](https://img.shields.io/circleci/project/VerdigrisTech/ember-cli-deploy-ghpages.svg)](https://circleci.com/gh/VerdigrisTech/ember-cli-deploy-ghpages)
 
 This plugin uploads your built Ember dist files to GitHub pages.
 
@@ -50,6 +50,14 @@ For more information on how to configure plugins, refer to the
 
 The URL that corresponds to your GitHub repository. The plugin will push the
 built dist files to the `gh-pages` branch on this repository.
+
+_Default:_ `undefined`
+
+### domain
+
+Custom domain name of your project site. For more information on how to set up
+custom domain for your project site, refer to [GitHub](https://help.github.com/articles/using-a-custom-domain-with-github-pages/)
+documentation.
 
 _Default:_ `undefined`
 
