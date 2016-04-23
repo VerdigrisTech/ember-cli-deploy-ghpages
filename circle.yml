@@ -3,3 +3,8 @@ machine:
     America/Los_Angeles
   node:
     version: 4.0.0
+
+checkout:
+  post:
+    - git config user.email "support@verdigris.co"
+    - git config user.name "Verdigris Technologies"
