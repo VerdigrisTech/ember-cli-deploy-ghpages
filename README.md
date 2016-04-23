@@ -64,3 +64,14 @@ _Default:_ `undefined`
 ## Running Tests
 
 * `npm test`
+
+## License
+
+This software is distributed AS IS WITHOUT WARRANTY under [Simplified BSD](https://raw.githubusercontent.com/VerdigrisTech/green-button-data/master/LICENSE.md)
+license.
+
+Verdigris Technologies Inc. assumes NO RESPONSIBILITY OR LIABILITY
+UNDER ANY CIRCUMSTANCES for usage of this software. See the [LICENSE.md](https://raw.githubusercontent.com/VerdigrisTech/green-button-data/master/LICENSE.md)
+file for detailed legal information.
+
+Copyright © 2016, [Verdigris Technologies Inc](http://verdigris.co). All rights reserved.
