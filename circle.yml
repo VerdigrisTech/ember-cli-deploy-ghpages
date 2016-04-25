@@ -16,9 +16,3 @@ dependencies:
 test:
   override:
     - istanbul cover ./tests/runner.js --report lcovonly && codecov
-
-deployment:
-  codecov:
-    branch: /.*/
-    commands:
-      - bash <(curl -s https://codecov.io/bash)
