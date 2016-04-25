@@ -8,3 +8,9 @@ checkout:
   post:
     - git config user.email "support@verdigris.co"
     - git config user.name "Verdigris Technologies"
+
+deployment:
+  codecov:
+    branch: /.*/
+    commands:
+      - bash <(curl -s https://codecov.io/bash)
