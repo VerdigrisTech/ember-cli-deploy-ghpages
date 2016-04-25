@@ -3,6 +3,7 @@
 > An ember-cli-deploy-plugin to upload to GitHub pages.
 
 [![Build](https://img.shields.io/circleci/project/VerdigrisTech/ember-cli-deploy-ghpages/master.svg)](https://circleci.com/gh/VerdigrisTech/ember-cli-deploy-ghpages)
+[![Coverage](https://img.shields.io/codecov/c/github/VerdigrisTech/ember-cli-deploy-ghpages/master.svg)](https://codecov.io/gh/VerdigrisTech/ember-cli-deploy-ghpages)
 
 This plugin uploads your built Ember dist files to GitHub pages.
 
