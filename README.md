@@ -30,6 +30,15 @@ To quickly get started with this plugin, follow the steps below:
   $ ember deploy
   ```
 
+## Browser History API Compatibility
+
+GitHub Pages is not compatible with browser's history API mode that Ember Router
+uses. This means you will not be able to use `pushState` to get to a URL hosted
+on GitHub pages. Please ensure your code is updated to use legacy `hash` mode.
+
+See [Ember Router documentation](http://emberjs.com/api/classes/Ember.Router.html#property_location)
+for more details.
+
 ## ember-cli-deploy Hooks Implemented
 
 For detailed information on what plugin hooks are and how they work, please
