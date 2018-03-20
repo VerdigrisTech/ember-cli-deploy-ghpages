@@ -18,7 +18,7 @@ module.exports = {
         }
       }
     },
-    /* {
+     {
       name: 'ember-release',
       bower: {
         dependencies: {
