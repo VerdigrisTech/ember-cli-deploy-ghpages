@@ -18,7 +18,7 @@ module.exports = {
         }
       }
     },
-    {
+    /* {
       name: 'ember-release',
       bower: {
         dependencies: {
@@ -50,6 +50,6 @@ module.exports = {
           'ember': 'canary'
         }
       }
-    }
+    } */
   ]
 };
