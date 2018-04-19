@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-deploy-ghpages",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "An ember-cli-deploy plugin to upload to GitHub Pages.",
   "keywords": [
     "ember-addon",
@@ -8,6 +8,9 @@
   ],
   "license": "BSD-2-Clause",
   "author": "Andrew Jo <andrew@verdigris.co> (https://github.com/AndrewJo)",
+  "contributors": [
+    "Alon Bukai <alonzorz@gmail.com> (http://www.alonbukai.com/)"
+  ],
   "directories": {
     "doc": "doc",
     "test": "tests"
