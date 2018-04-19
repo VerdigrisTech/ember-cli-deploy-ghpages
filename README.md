@@ -10,7 +10,7 @@ This plugin uploads your built Ember dist files to GitHub pages.
 
 To quickly get started with this plugin, follow the steps below:
 
-* Ensure [ember-cli-deploy-build](https://github.com/zapnito/ember-cli-deploy-build)
+* Ensure [ember-cli-deploy-build](https://github.com/ember-cli-deploy/ember-cli-deploy-build)
   is installed.
 * Install this plugin.
 
