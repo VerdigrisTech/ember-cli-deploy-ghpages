@@ -43,7 +43,7 @@ describe('github pages plugin', function () {
       project: stubProject,
       config: {
         ghpages: {
-          gitRemoteUrl: 'git@github.com:VerdigrisTech/ember-cli-deploy-ghpages.git',
+          gitRemoteUrl: 'https://github.com/Alonski/ember-cli-deploy-ghpages', // Need to revert before merging
           gitRemoteName: 'ember-cli-deploy-test',
           domain: 'test.example.com'
         }

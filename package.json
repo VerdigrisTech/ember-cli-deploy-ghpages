@@ -50,7 +50,7 @@
     "ember-cli-babel": "^5.1.5",
     "ember-cli-deploy-plugin": "^0.2.5",
     "fs-extra": "^0.28.0",
-    "gift": "^0.7.0",
+    "gift": "^0.10.2",
     "rsvp": "^3.2.1"
   },
   "ember-addon": {
