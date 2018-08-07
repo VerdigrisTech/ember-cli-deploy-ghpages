@@ -13,20 +13,20 @@ jobs:
             - v1-node-modules-{{ checksum "package.json" }}
             - v1-node-modules
       - run:
+          name: Install dependencies
+          command: npm install
+      - save_cache:
+          key: v1-node-modules-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run:
           name: Change Git user
           command: |
             git config user.email "support@verdigris.co"
             git config user.name "Verdigris Technologies"
       - run:
-          name: Install dependencies
-          command: npm install
-      - run:
           name: Run tests
           command: npm test
-      - save_cache:
-          key: v1-node-modules-{{ checksum "package.json" }}
-          paths:
-            - node_modules
 
 workflows:
   version: 2
