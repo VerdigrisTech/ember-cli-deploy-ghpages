@@ -33,8 +33,7 @@ workflows:
   feature-branch-test:
     jobs:
       - test:
-          filters:
-            branches:
-              ignore:
-                - master
-                - gh-pages
+          branches:
+            ignore:
+              - master
+              - gh-pages
