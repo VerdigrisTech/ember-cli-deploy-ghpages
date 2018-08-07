@@ -35,4 +35,4 @@ workflows:
       - test:
           filters:
             branches:
-              ignore: /(master)|(gh-pages)/
+              ignore: /^master$|^gh-pages$/s
